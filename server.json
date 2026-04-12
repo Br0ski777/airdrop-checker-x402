@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Br0ski777/airdrop-checker",
+  "title": "Airdrop Checker API",
+  "description": "Check wallet eligibility for active crypto airdrops — LayerZero, EigenLayer, Scroll. x402.",
+  "version": "1.0.0",
+  "websiteUrl": "https://github.com/Br0ski777/airdrop-checker-x402",
+  "repository": {
+    "url": "https://github.com/Br0ski777/airdrop-checker-x402",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "sse",
+      "url": "https://airdrop-checker-x402-production.up.railway.app/mcp"
+    }
+  ]
+}
