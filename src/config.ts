@@ -33,6 +33,60 @@ Do NOT use for wallet balance -- use wallet_get_portfolio. Do NOT use for token 
         },
         required: ["address"],
       },
+      outputSchema: {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "string",
+              "description": "Wallet address checked"
+            },
+            "checkedAt": {
+              "type": "string",
+              "description": "ISO 8601 timestamp"
+            },
+            "transactionsScanned": {
+              "type": "number",
+              "description": "Number of transactions scanned"
+            },
+            "eligible": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "number"
+                },
+                "airdrops": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "potential": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "number"
+                },
+                "airdrops": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "totalActiveAirdrops": {
+              "type": "number",
+              "description": "Total active airdrops tracked"
+            }
+          },
+          "required": [
+            "address",
+            "eligible",
+            "potential"
+          ]
+        },
     },
   ],
 };
