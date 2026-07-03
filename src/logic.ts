@@ -184,8 +184,8 @@ async function checkWalletInteractions(address: string): Promise<Set<string>> {
 }
 
 export function registerRoutes(app: Hono) {
-  app.get("/api/check", async (c) => {
-    const address = c.req.query("address");
+  async function handleCheck(c: any, params: { address?: string }) {
+    const address = params.address;
 
     if (!address || !address.match(/^0x[a-fA-F0-9]{40}$/)) {
       return c.json({ error: "Missing or invalid address parameter. Provide a valid Ethereum address (0x...)" }, 400);
@@ -223,5 +223,18 @@ export function registerRoutes(app: Hono) {
       },
       totalActiveAirdrops: AIRDROPS.filter((a) => a.status !== "ended").length,
     });
+  }
+
+  app.get("/api/check", async (c) => {
+    return handleCheck(c, { address: c.req.query("address") });
+  });
+
+  // POST mirror of the GET route above -- Bazaar (CDP) only reliably indexes
+  // POST payments with valid payloads (~82% conversion vs ~14% for GET-only
+  // resources, confirmed empirically). Same params, same logic, just body
+  // instead of query string.
+  app.post("/api/check", async (c) => {
+    const body = await c.req.json().catch(() => ({}) as any);
+    return handleCheck(c, { address: body.address });
   });
 }
