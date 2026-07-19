@@ -35,7 +35,8 @@ Any x402-aware client ([`@x402/fetch`](https://www.npmjs.com/package/@x402/fetch
 
 | Tool | Method | Path | Price | Description |
 |---|---|---|---|---|
-| `crypto_check_airdrops` | GET | `/api/check` | $0.005 | Check wallet eligibility for crypto airdrops |
+| `crypto_check_airdrops` | GET | `/api/check` | $0.012 | Check wallet eligibility for crypto airdrops |
+| `crypto_check_airdrops` | POST | `/api/check` | $0.012 | Check wallet eligibility for crypto airdrops (POST variant) |
 
 ### `crypto_check_airdrops`
 
@@ -63,8 +64,35 @@ Example response:
 
 **When to use**: discovering unclaimed airdrops, monitoring multiple wallets for eligibility, or building airdrop farming dashboards.
 
+### `crypto_check_airdrops`
+
+Use this when you need to check if a wallet address is eligible for crypto airdrops. Scans wallet interactions against known airdrop contracts and returns eligible claims. POST variant of crypto_check_airdrops -- same params passed as JSON body instead of query string.
+
+**Parameters**
+
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `address` | string | yes | Ethereum wallet address (0x...) |
+
+**Returns**
+
+- `eligible` -- array of airdrops the wallet qualifies for
+- `totalEligible` -- number of eligible airdrops found
+- `totalEstimatedValue` -- combined estimated USD value of all eligible airdrops
+- `walletAddress` -- the address checked
+- `checkedAt` -- timestamp of the check
+
+Example response:
+
+```json
+{"eligible":[{"tokenName":"LayerZero","tokenSymbol":"ZRO","estimatedValueUsd":450,"deadline":"2026-06-30T00:00:00Z","claimUrl":"https://claim.layerzero.network","status":"claimable"}],"totalEligible":3,"totalEstimatedValue":1250,"walletAddress":"0x742d...","checkedAt":"2026-04-13T12:00:00Z"}
+```
+
+**When to use**: discovering unclaimed airdrops, monitoring multiple wallets for eligibility, or building airdrop farming dashboards.
+
 ## Example agent prompts
 
+- "Check if a wallet address is eligible for crypto airdrops"
 - "Check if a wallet address is eligible for crypto airdrops"
 
 ## Payment
