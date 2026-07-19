@@ -9,7 +9,7 @@ export const API_CONFIG: ApiConfig = {
     {
       method: "GET",
       path: "/api/check",
-      price: "$0.005",
+      price: "$0.012",
       description: "Check wallet eligibility for crypto airdrops",
       toolName: "crypto_check_airdrops",
       toolDescription: `Use this when you need to check if a wallet address is eligible for crypto airdrops. Scans wallet interactions against known airdrop contracts and returns eligible claims.
@@ -91,7 +91,7 @@ Do NOT use for wallet balance -- use wallet_get_portfolio. Do NOT use for token 
     {
       method: "POST",
       path: "/api/check",
-      price: "$0.005",
+      price: "$0.012",
       description: "Check wallet eligibility for crypto airdrops (POST variant)",
       toolName: "crypto_check_airdrops",
       toolDescription: `Use this when you need to check if a wallet address is eligible for crypto airdrops. Scans wallet interactions against known airdrop contracts and returns eligible claims. POST variant of crypto_check_airdrops -- same params passed as JSON body instead of query string.
